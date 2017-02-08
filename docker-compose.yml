@@ -1,0 +1,23 @@
+version: '2'
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ywuscu2017
+      MYSQL_DATABASE: web
+      MYSQL_USER: web
+      MYSQL_PASSWORD: ywuscu2017
+  web:
+    depends_on:
+      - db
+    build: .
+    image: ywu-php
+    ports:
+      - "8000:80"
+    volumes:
+      - ./web:/var/www/html/
+volumes:
+  db_data:
